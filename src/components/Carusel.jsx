@@ -14,7 +14,7 @@ const Carusel = () => {
   const images = [image1, image2, image3, image4];
 
   return (
-    <div className="w-[100%] h-[450px] rounded-[15px] overflow-hidden">
+    <div className="w-[100%] h-[450px] rounded-[15px] overflow-hidden my-10">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}

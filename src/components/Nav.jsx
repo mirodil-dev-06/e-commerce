@@ -1,42 +1,29 @@
-import { Link } from "react-router-dom";
-import logo from "../images/logo.png";
-import {Container} from "../utils/Utils";
+import { Container } from "../utils/Utils";
+import NavMenu from "./NavMenu";
 
 const Nav = () => {
-  const linkStyle = {
-    color: "#757575",
-    fontFamily: "Golos, sans-serif",
-    fontWeight: 400,
-    fontSize: "14px",
-  };
-
   return (
-    <nav className="bg-[#f4f5f8] py-4">
+    <nav className="bg-[#3C4242] text-white py-4">
       <Container>
-        <div className="flex justify-between items-center">
-          <Link to="/">
-            <img src={logo} alt="Okoprom logo" />
-          </Link>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
 
-          <div className="flex gap-20">
-            <div className="flex gap-12">
-              <a href="mailto:okoprom@gmail.com" style={linkStyle}>
-                okoprom@gmail.com
-              </a>
-              <a href="tel:+78007073101" style={linkStyle}>
-                +7 (800) 707-31-01
-              </a>
-            </div>
+          <NavMenu />
 
-            <div className="flex gap-12">
-              <Link to="/delivery" style={linkStyle}>
-                Доставка и оплата
-              </Link>
-              <Link to="/guarantee" style={linkStyle}>
-                Гарантия
-              </Link>
-            </div>
+          <div className="flex flex-col sm:flex-row sm:gap-12 text-sm font-light">
+            <a
+              href="mailto:okoprom@gmail.com"
+              className="hover:text-[#f6f6f6] transition-colors duration-200"
+            >
+              okoprom@gmail.com
+            </a>
+            <a
+              href="tel:+78007073101"
+              className="hover:text-[#f6f6f6] transition-colors duration-200"
+            >
+              +7 (800) 707-31-01
+            </a>
           </div>
+          
         </div>
       </Container>
     </nav>

@@ -1,6 +1,5 @@
 
 .swiper {
-  /* width: 100%; */
   height: 100%;
 }
 
@@ -8,8 +7,6 @@
   text-align: center;
   font-size: 18px;
   background: #444;
-
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,4 +22,10 @@
 .swiper {
   margin-left: auto;
   margin-right: auto;
+}
+.swiper-navigation-icon{
+  color: #8A33FD;
+}
+.swiper-pagination-bullet-active{
+  background-color: #8A33FD;
 }

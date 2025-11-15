@@ -29,11 +29,9 @@ const Login = () => {
       const { accessToken, refreshToken, message } = res.data;
 
       if (accessToken) {
-        // Tokenlarni saqlash
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
 
-        // Redux dispatch
         dispatch({
           type: "LOGIN_USER",
           payload: {

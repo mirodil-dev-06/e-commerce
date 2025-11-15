@@ -1,7 +1,5 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState } from 'react';
 import { instance } from '../api/axios';
-import { Container } from '../utils/Utils';
-import { v4 as uuidv4 } from 'uuid';
 import ProductContainer from './ProductContainer';
 
 const Main = () => {
@@ -14,12 +12,10 @@ const Main = () => {
   }, []);
 
   return (
-    <Container>
-      <div className='home__product-carousel'>
-        <h2 className='text-xl font-bold mb-3'>All Products</h2>
+      <div className='py-10'>
+        <h2 className='text-3xl font-bold my-5 text-[#3F4646] '>Mashhur</h2>
         <ProductContainer categoryData={{ allRefinedProducts: homeReeldata }} />
       </div>
-    </Container>
   );
 };
 

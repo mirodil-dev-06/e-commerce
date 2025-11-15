@@ -1,50 +1,78 @@
-import { Container } from '../utils/Utils'
-import { NavLink } from "react-router-dom";
-import search_icon from '../images/Search.svg'
-import cart_icon from '../images/Cart.svg' 
-import SearchBox from './SearchBox';
-import Aside from './Aside';
+import React, { useState, useEffect } from "react";
+import { Container } from "../utils/Utils";
+import { NavLink, Link } from "react-router-dom";
+import SearchBox from "./SearchBox";
+import Aside from "./Aside";
+import { FaRegHeart } from "react-icons/fa";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { FiUser } from "react-icons/fi";
 
-function Search() {
-    const navItems = [
-        { path: "/category", label: "Каталог" },
-        { path: "/production", label: "Наше производство" },
-        { path: "/about", label: "О компании" },
-        { path: "/contact", label: "Контакты" },
-    ];
+const navIcons = [
+  { path: "/wishes", icon: <FaRegHeart /> },
+  { path: "/cart", icon: <MdOutlineShoppingCart /> },
+  { path: "/login", icon: <FiUser /> },
+];
 
-    const baseClasses = "py-2 px-4 bg-[#f4f5f8] rounded-[5px] font-[Golos, sans-serif]";
-    const activeLink = "text-[#202226] font-semibold";
-    const inactiveLink = "text-[#161616] font-normal";
+const Search = () => {
+  const [cartCount, setCartCount] = useState(0);
 
-    return (
-        <div className="py-8">
-            <Container>
-                <div className="flex justify-between items-center">
-                    <ul className="flex gap-4">
-                        {navItems.map((item) => (
-                            <li key={item.path} className={baseClasses}>
-                                <NavLink
-                                    to={item.path}
-                                    className={({ isActive }) =>
-                                        isActive ? activeLink : inactiveLink
-                                    }
-                                >
-                                    {item.label}
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                    <Aside/>
-                    <div className="flex gap-2">
-                        <SearchBox/>
-                        <button className="p-2 bg-[#f4f5f8] rounded-[5px]"><img src={cart_icon}/></button>
-                        <button className="py-2 px-4 bg-[#202226] rounded-[5px] text-[#fff] cursor-pointer">Запросить консультацию</button>
-                    </div>
-                </div>
-            </Container>
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      setCartCount(cartItems.length);
+    };
+
+    updateCartCount();
+
+    const handleStorageChange = (e) => {
+      if (e.key === "cart") updateCartCount();
+    };
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return (
+    <div className="py-6 border-b border-gray-200 bg-white">
+      <Container>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+
+          <Link to="/" className="text-2xl font-bold text-[#8A33FD]">
+            ShopLine
+          </Link>
+
+          <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6">
+
+            <Aside />
+
+            <SearchBox />
+
+            <ul className="flex items-center gap-3 sm:gap-4">
+              {navIcons.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-200
+                    ${isActive ? "bg-[#8A33FD] text-white relative" : "bg-gray-100 text-gray-700 relative"}`
+                  }
+                >
+                  {item.icon}
+
+                  {item.path === "/cart" && cartCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] px-[5px] py-[1px] rounded-full font-medium">
+                      {cartCount}
+                    </span>
+                  )}
+                </NavLink>
+              ))}
+            </ul>
+
+          </div>
         </div>
-    );
-}
+      </Container>
+    </div>
+  );
+};
 
 export default Search;

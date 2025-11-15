@@ -11,7 +11,6 @@ const AuthContainer = () => {
   useEffect(() => {
     const token = localStorage.getItem("access-admin-token");
 
-    // Agar token yo‘q bo‘lsa, foydalanuvchini login sahifasiga yo‘naltiramiz
     if (!token) {
       setIsTokenValid(false);
       setLoading(false);
